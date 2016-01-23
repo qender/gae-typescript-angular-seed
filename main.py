@@ -44,7 +44,7 @@ class HigherMeApi(remote.Service):
 # - - - Question objects - - - - - - - - - - - - - - - - - -
 
     def _newQuestion(self, request):
-        """Create a new Question."""
+        """Create a new Question and return a QuestionForm"""
         if request:
             question = Question.Question(
                 questionText = request.questionText,
@@ -56,11 +56,32 @@ class HigherMeApi(remote.Service):
             return request
 
 
+    def _nextQuestion(self, request):
+        """Get the next Question in a Questionnaire and return a QuestionForm"""
+        next_question = Question.Question.query(Question.Question.order > request.order, Question.Question.questionnaire == str(request.questionnaire)).order(Question.Question.order).fetch(1)[0]
+        qf = Question.QuestionForm()
+        for field in qf.all_fields():
+            if hasattr(next_question, field.name):
+                if field.name == 'questionType':
+                    setattr(qf, field.name, getattr(Question.QuestionType, getattr(next_question, field.name)))
+                elif field.name == 'questionnaire':
+                    setattr(qf, field.name, getattr(Question.Questionnaire, getattr(next_question, field.name)))
+                else:
+                    setattr(qf, field.name, getattr(next_question, field.name))
+        return qf
+
+
     @endpoints.method(Question.QuestionForm, Question.QuestionForm,
             path='question', http_method='POST', name='question')
     def question(self, request):
-        """Endpoint to create a new Question."""
+        """Endpoint to create a new Question"""
         return self._newQuestion(request)
+
+    @endpoints.method(Question.NextQuestionForm, Question.QuestionForm,
+                      path='question/next', http_method='GET', name='nextQuestion')
+    def nextQuestion(self, request):
+        """Endpoint to return the next Question in a Questionnaire"""
+        return self._nextQuestion(request)
 
 
 
