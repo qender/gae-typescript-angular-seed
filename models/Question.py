@@ -11,9 +11,11 @@ class Question(ndb.Model):
 
 
 class QuestionForm(messages.Message):
-    """Question outbound message"""
+    """Question inbound message"""
     questionText = messages.StringField(1)
-    questionType = messages.EnumField('QuestionType', 1)
+    questionnaire = messages.EnumField('Questionnaire', 2)
+    order = messages.IntegerField(3)
+    questionType = messages.EnumField('QuestionType', 4)
 
 
 class Questionnaire(messages.Enum):
