@@ -13,6 +13,9 @@ handlers:       # static then dynamic
 - url: /scripts
   static_dir: static/scripts
 
+#- url: /scripts/js
+#  static_dir: static/scripts/js
+
 - url: /img
   static_dir: static/img
 
