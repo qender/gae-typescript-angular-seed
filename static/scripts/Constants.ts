@@ -8,6 +8,6 @@ module HigherMe {
         public static APP_SERVICES_MODULE = Constants.APP_MODULE + ".services";
         public static APP_FILTERS_MODULE = Constants.APP_MODULE + ".filters";
         public static APP_PARTIALS_MODULE = Constants.APP_MODULE + ".partials";
-        public static API_BASE_URL = "/_ah/api";
+        public static API_BASE_URL = "/_ah/api/higherme/v1";
     }
 }
