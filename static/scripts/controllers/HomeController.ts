@@ -5,7 +5,7 @@ module HigherMe.Controllers {
     export class HomeController extends BaseController {
 
         // @ngInject
-        constructor(private $scope) {
+        constructor($scope) {
             super($scope);
 
             console.log("Hello World!")
