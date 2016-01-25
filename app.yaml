@@ -17,7 +17,7 @@ handlers:       # static then dynamic
   static_dir: static/img
 
 - url: /styles
-  static_dir: static/bootstrap/styles
+  static_dir: static/styles
 
 - url: /partials
   static_dir: static/partials

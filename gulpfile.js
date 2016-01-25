@@ -28,23 +28,21 @@ gulp.task('typescript', function() {
         .pipe(gulp.dest('static/scripts/js'));
 });
 
-//gulp.task('sass', function () {
-//    return gulp.src(
-//        'sass/main.scss'
-//    )
-//    .pipe(sass().on('error', sass.logError))
-//    .pipe(gulp.dest('sass/concat-css'));
-//});
-//
-//gulp.task('concatCss', ['sass'], function() {
-//    return gulp.src([
-//        'sass/concat-css/main.css',
-//        'sass/concat-css/*.css'
-//    ])
-//    .pipe(concatCss('kumbaya.css'))
-//    .pipe(gulp.dest('app/styles'))
-//});
-//
-//gulp.task('default', ['sass','concatCss']);
+gulp.task('sass', function () {
+    return gulp.src(
+        'static/styles/sass/main.scss'
+    )
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('static/styles/css/concat-css'));
+});
 
-gulp.task('default', ['typescript']);
+gulp.task('concatCss', ['sass'], function() {
+    return gulp.src([
+        'static/styles/css/concat-css/main.css',
+        'static/styles/css/concat-css/*.css'
+    ])
+    .pipe(concatCss('higherme.css'))
+    .pipe(gulp.dest('static/styles/css'))
+});
+
+gulp.task('default', ['sass','concatCss','typescript']);
