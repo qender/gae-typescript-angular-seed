@@ -2,3 +2,6 @@
 # Google App Engine generated folder
 appengine-generated/
 node_modules
+.idea/*.xml
+.idea/libraries
+*.iml
